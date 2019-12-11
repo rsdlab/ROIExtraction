@@ -1,0 +1,170 @@
+﻿// -*- C++ -*-
+/*!
+ * @file  ROIExtractionTest.cpp
+ * @brief ROI extraction from ArUco maker corners information
+ * @date $Date$
+ *
+ * $Id$
+ */
+
+#include "ROIExtractionTest.h"
+
+// Module specification
+// <rtc-template block="module_spec">
+static const char* roiextraction_spec[] =
+  {
+    "implementation_id", "ROIExtractionTest",
+    "type_name",         "ROIExtractionTest",
+    "description",       "ROI extraction from ArUco maker corners information",
+    "version",           "1.0.0",
+    "vendor",            "Masayuki Fukao, Robot System Design Laboratory, Meijo University",
+    "category",          "Image Processing",
+    "activity_type",     "PERIODIC",
+    "kind",              "DataFlowComponent",
+    "max_instance",      "1",
+    "language",          "C++",
+    "lang_type",         "compile",
+    ""
+  };
+// </rtc-template>
+
+/*!
+ * @brief constructor
+ * @param manager Maneger Object
+ */
+ROIExtractionTest::ROIExtractionTest(RTC::Manager* manager)
+    // <rtc-template block="initializer">
+  : RTC::DataFlowComponentBase(manager),
+    m_CornerPointsIn("CornerPoints", m_CornerPoints),
+    m_CornersOut("Corners", m_Corners)
+
+    // </rtc-template>
+{
+}
+
+/*!
+ * @brief destructor
+ */
+ROIExtractionTest::~ROIExtractionTest()
+{
+}
+
+
+
+RTC::ReturnCode_t ROIExtractionTest::onInitialize()
+{
+  // Registration: InPort/OutPort/Service
+  // <rtc-template block="registration">
+  // Set InPort buffers
+  addInPort("Corners", m_CornersIn);
+  
+  // Set OutPort buffer
+  addOutPort("CornerPoints", m_CornerPointsOut);
+  
+  // Set service provider to Ports
+  
+  // Set service consumers to Ports
+  
+  // Set CORBA Service Ports
+  
+  // </rtc-template>
+
+  // <rtc-template block="bind_config">
+  // </rtc-template>
+  
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onFinalize()
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onStartup(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onShutdown(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onActivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onDeactivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onExecute(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onAborting(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onError(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onReset(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onStateUpdate(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t ROIExtractionTest::onRateChanged(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+
+extern "C"
+{
+ 
+  void ROIExtractionTestInit(RTC::Manager* manager)
+  {
+    coil::Properties profile(roiextraction_spec);
+    manager->registerFactory(profile,
+                             RTC::Create<ROIExtractionTest>,
+                             RTC::Delete<ROIExtractionTest>);
+  }
+  
+};
+
+

@@ -1,0 +1,54 @@
+# ROIExtraction CMake config file
+#
+# This file sets the following variables:
+# ROIExtraction_FOUND - Always TRUE.
+# ROIExtraction_INCLUDE_DIRS - Directories containing the ROIExtraction include files.
+# ROIExtraction_IDL_DIRS - Directories containing the ROIExtraction IDL files.
+# ROIExtraction_LIBRARIES - Libraries needed to use ROIExtraction.
+# ROIExtraction_DEFINITIONS - Compiler flags for ROIExtraction.
+# ROIExtraction_VERSION - The version of ROIExtraction found.
+# ROIExtraction_VERSION_MAJOR - The major version of ROIExtraction found.
+# ROIExtraction_VERSION_MINOR - The minor version of ROIExtraction found.
+# ROIExtraction_VERSION_REVISION - The revision version of ROIExtraction found.
+# ROIExtraction_VERSION_CANDIDATE - The candidate version of ROIExtraction found.
+
+message(STATUS "Found ROIExtraction-@PROJECT_VERSION@")
+set(ROIExtraction_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(ROIExtraction_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(ROIExtraction_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(ROIExtraction_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(ROIExtraction_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(ROIExtraction_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(ROIExtraction_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(ROIExtraction_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(ROIExtraction_VERSION @PROJECT_VERSION@)
+set(ROIExtraction_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(ROIExtraction_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(ROIExtraction_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(ROIExtraction_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
